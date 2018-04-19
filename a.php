@@ -26,10 +26,11 @@ if (!empty($firstname) AND !empty($lastname) AND !empty($file)) {
 
 		$fileName = $first.'_'.$last.'.'.$ext;
 
-		move_uploaded_file($file["tmp_name"], basename($fileName));
-
-		echo "Soubor $fileName nahrán.";
-
+		if (move_uploaded_file($file["tmp_name"], basename($fileName))) {
+			echo "Soubor $fileName nahrán.";
+		} else {
+			echo "Soubor $fileName se nepodařilo nahrát.";
+		}
 	} else {
 		echo "Jméno a příjmení mohou obsahovat pouze velká a malá písmena české abecedy, případně jednu pomlčku (mezi textem).";
 	}
